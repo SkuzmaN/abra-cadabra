@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
 import Greetings from './Greetings';
+import ToggleableMixin from '../mixins/toggleableMixin';
 
-export default class Modal extends Component {
-  constructor(props) {
-    super(props);
+const Modal = createReactClass({
+  mixins: [ToggleableMixin],
+  render() {
+    const { isVisable } = this.state;
+    return (
+      <div>
+        <Greetings isVisable={isVisable} name="Modal" />
+        <button type="button" onClick={this.toggle}>{isVisable ? 'hide' : 'show'}</button>
+      </div>
+    );
+  },
+});
 
-    this.state = {
-      isVisable: false,
-    };
-  }
-
-    toggle = () => {
-      const { isVisable } = this.state;
-      const newState = !isVisable;
-      this.setState({ isVisable: newState });
-    }
-
-    show = () => this.setState({ isVisable: true });
-
-    hide = () => this.setState({ isVisable: false });
-
-
-    render() {
-      const { isVisable } = this.state;
-      return (
-        <div>
-          <Greetings isVisable={isVisable} name="Modal" />
-          <button type="button" onClick={this.toggle}>{isVisable ? 'hide' : 'show'}</button>
-        </div>
-      );
-    }
-}
+export default Modal;

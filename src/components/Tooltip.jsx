@@ -1,39 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+import createReactClass from 'create-react-class';
 import Greetings from './Greetings';
+import ToggleableMixin from '../mixins/toggleableMixin';
 
-export default class Tooltip extends Component {
-  constructor(props) {
-    super(props);
+const Tooltip = createReactClass({
+  mixins: [ToggleableMixin],
+  render() {
+    const { isVisable } = this.state;
+    return (
+      <div>
+        <Greetings isVisable={isVisable} name="Tooltip" />
+        <button
+          type="button"
+          onMouseEnter={this.show}
+          onMouseLeave={this.hide}
+        >
+          hover on
+        </button>
+      </div>
+    );
+  },
+});
 
-    this.state = {
-      isVisable: false,
-    };
-  }
-
-    toggle = () => {
-      const { isVisable } = this.state;
-      const newState = !isVisable;
-      this.setState({ isVisable: newState });
-    }
-
-    show = () => this.setState({ isVisable: true });
-
-    hide = () => this.setState({ isVisable: false });
-
-
-    render() {
-      const { isVisable } = this.state;
-      return (
-        <div>
-          <Greetings isVisable={isVisable} name="Tooltip" />
-          <button
-            type="button"
-            onMouseEnter={this.show}
-            onMouseLeave={this.hide}
-          >
-            hover on
-          </button>
-        </div>
-      );
-    }
-}
+export default Tooltip;
