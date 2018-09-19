@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 function toggleable(WrappedComponent) {
-  class Toggleable extends Component {
+  return class extends Component {
     constructor(props) {
       super(props);
 
@@ -32,8 +32,7 @@ function toggleable(WrappedComponent) {
           />
         );
       }
-  }
-  return Toggleable;
+  };
 }
 
 export default toggleable;
