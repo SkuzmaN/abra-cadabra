@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
+
 function toggleable(WrappedComponent) {
-  return class extends Component {
+  class Toggleable extends Component {
     constructor(props) {
       super(props);
 
@@ -32,7 +36,9 @@ function toggleable(WrappedComponent) {
           />
         );
       }
-  };
+  }
+  Toggleable.displayName = `Toggleable(${getDisplayName(WrappedComponent)})`;
+  return Toggleable;
 }
 
 export default toggleable;
