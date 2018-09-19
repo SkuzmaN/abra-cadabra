@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Greetings from './Greetings';
-import toggleable from '../hoc/toggleable';
 
-export const Tooltip = ({ isVisable, show, hide }) => (
+const Tooltip = ({ isVisable, show, hide }) => (
   <div>
     <Greetings isVisable={isVisable} name="Tooltip" />
     <button
@@ -22,4 +21,4 @@ Tooltip.propTypes = {
   hide: PropTypes.func.isRequired,
 };
 
-export default toggleable(Tooltip);
+export default Tooltip;

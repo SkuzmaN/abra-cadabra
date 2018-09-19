@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Greetings from './Greetings';
-import toggleable from '../hoc/toggleable';
 import abra from '../abra.png';
 
-export const Collapsed = ({ isVisable, toggle, hide }) => (
+const Collapsed = ({ isVisable, toggle, hide }) => (
   <div>
     <Greetings name="Collapsed" isVisable={isVisable} />
     <header><button type="button" onClick={toggle}>Collapse section header. Click to expand</button></header>
@@ -24,4 +23,4 @@ Collapsed.propTypes = {
   hide: PropTypes.func.isRequired,
 };
 
-export default toggleable(Collapsed);
+export default Collapsed;
