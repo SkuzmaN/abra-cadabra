@@ -1,33 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Greetings from './Greetings';
+import toggleable from '../hoc/toggleable';
 
-export default class Modal extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isVisable: false,
-    };
-  }
-
-    toggle = () => {
-      const { isVisable } = this.state;
-      const newState = !isVisable;
-      this.setState({ isVisable: newState });
-    }
-
-    show = () => this.setState({ isVisable: true });
-
-    hide = () => this.setState({ isVisable: false });
-
-
-    render() {
-      const { isVisable } = this.state;
-      return (
-        <div>
-          <Greetings isVisable={isVisable} name="Modal" />
-          <button type="button" onClick={this.toggle}>{isVisable ? 'hide' : 'show'}</button>
-        </div>
-      );
-    }
-}
+export const Modal = ({ isVisable, toggle }) => (
+  <div>
+    <Greetings isVisable={isVisable} name="Modal" />
+    <button type="button" onClick={toggle}>{isVisable ? 'hide' : 'show'}</button>
+  </div>
+);
+Modal.propTypes = {
+  isVisable: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
+export default toggleable(Modal);

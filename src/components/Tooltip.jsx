@@ -1,39 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Greetings from './Greetings';
+import toggleable from '../hoc/toggleable';
 
-export default class Tooltip extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isVisable: false,
-    };
-  }
-
-    toggle = () => {
-      const { isVisable } = this.state;
-      const newState = !isVisable;
-      this.setState({ isVisable: newState });
-    }
-
-    show = () => this.setState({ isVisable: true });
-
-    hide = () => this.setState({ isVisable: false });
-
-
-    render() {
-      const { isVisable } = this.state;
-      return (
-        <div>
-          <Greetings isVisable={isVisable} name="Tooltip" />
-          <button
-            type="button"
-            onMouseEnter={this.show}
-            onMouseLeave={this.hide}
-          >
+export const Tooltip = ({ isVisable, show, hide }) => (
+  <div>
+    <Greetings isVisable={isVisable} name="Tooltip" />
+    <button
+      type="button"
+      onMouseEnter={show}
+      onMouseLeave={hide}
+    >
             hover on
-          </button>
-        </div>
-      );
-    }
-}
+    </button>
+  </div>
+);
+
+Tooltip.propTypes = {
+  isVisable: PropTypes.bool.isRequired,
+  show: PropTypes.func.isRequired,
+  hide: PropTypes.func.isRequired,
+};
+
+export default toggleable(Tooltip);

@@ -1,42 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Greetings from './Greetings';
-
+import toggleable from '../hoc/toggleable';
 import abra from '../abra.png';
 
-export default class Collapsed extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isVisable: false,
-    };
+export const Collapsed = ({ isVisable, toggle, hide }) => (
+  <div>
+    <Greetings name="Collapsed" isVisable={isVisable} />
+    <header><button type="button" onClick={toggle}>Collapse section header. Click to expand</button></header>
+    {isVisable && (
+    <article>
+      <img src={abra} alt="logo" />
+      <button type="button" onClick={hide}>Close</button>
+    </article>
+    )
   }
+  </div>
+);
 
-    toggle = () => {
-      const { isVisable } = this.state;
-      const newState = !isVisable;
-      this.setState({ isVisable: newState });
-    }
+Collapsed.propTypes = {
+  isVisable: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+  hide: PropTypes.func.isRequired,
+};
 
-    show = () => this.setState({ isVisable: true });
-
-    hide = () => this.setState({ isVisable: false });
-
-
-    render() {
-      const { isVisable } = this.state;
-      return (
-        <div>
-          <Greetings name="Collapsed" isVisable={isVisable} />
-          <header><button type="button" onClick={this.toggle}>Collapse section header. Click to expand</button></header>
-          {isVisable && (
-          <article>
-            <img src={abra} alt="logo" />
-            <button type="button" onClick={this.hide}>Close</button>
-          </article>
-          )
-          }
-        </div>
-      );
-    }
-}
+export default toggleable(Collapsed);
