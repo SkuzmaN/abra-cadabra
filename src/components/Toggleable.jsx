@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Toggleable extends Component {
     static propTypes = {
-      render: PropTypes.func.isRequired,
+      children: PropTypes.func.isRequired,
     }
 
     constructor(props) {
@@ -26,8 +26,8 @@ export default class Toggleable extends Component {
 
       render() {
         const { isVisable } = this.state;
-        const { render } = this.props;
-        return render({
+        const { children } = this.props;
+        return children({
           isVisable,
           toggle: this.toggle,
           show: this.show,

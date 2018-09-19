@@ -9,17 +9,18 @@ import 'bulma/css/bulma.css';
 const App = () => (
   <div>
     <Panel>
-      <Toggleable render={
-        ({ isVisable, toggle }) => <Modal isVisable={isVisable} toggle={toggle} />}
-      />
+      <Toggleable>
+        {({ isVisable, toggle }) => <Modal isVisable={isVisable} toggle={toggle} />}
+      </Toggleable>
     </Panel>
     <Panel>
-      <Toggleable render={
-        ({ isVisable, show, hide }) => <Tooltip isVisable={isVisable} show={show} hide={hide} />}
-      />
+      <Toggleable>
+        {({ isVisable, show, hide }) => <Tooltip isVisable={isVisable} show={show} hide={hide} />}
+      </Toggleable>
     </Panel>
     <Panel>
-      <Toggleable render={
+      <Toggleable>
+        {
         ({ isVisable, toggle, hide }) => (
           <Collapsed
             isVisable={isVisable}
@@ -27,7 +28,7 @@ const App = () => (
             hide={hide}
           />
         )}
-      />
+      </Toggleable>
     </Panel>
   </div>
 );
